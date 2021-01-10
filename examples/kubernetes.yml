@@ -39,6 +39,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: local-storage
   resources:
     requests:
       storage: 3Gi
@@ -90,6 +91,7 @@ spec:
       spec:
         accessModes:
           - ReadWriteOnce
+        storageClassName: local-storage
         resources:
           requests:
             storage: 3Gi
