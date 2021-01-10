@@ -94,7 +94,7 @@ spec:
                 name: minecraft-bedrock
           volumeMounts:
             - mountPath: /data
-              name: bds-data
+              name: data
           ports:
             - containerPort: 19132
               protocol: UDP
@@ -117,6 +117,7 @@ spec:
         resources:
           requests:
             storage: 3Gi
+        storageClassName: local-storage
 ---
 apiVersion: v1
 kind: Service
