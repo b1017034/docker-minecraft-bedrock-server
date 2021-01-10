@@ -10,12 +10,12 @@ data:
   # Find more options at https://github.com/itzg/docker-minecraft-bedrock-server#server-properties
   # Remove # from in front of line if changing from default values.
   EULA: "TRUE" # Must accept EULA to use this minecraft server
-  #GAMEMODE: "survival" # Options: survival, creative, adventure
-  #DIFFICULTY: "easy" # Options: peaceful, easy, normal, hard
+  GAMEMODE: "survival" # Options: survival, creative, adventure
+  DIFFICULTY: "normal" # Options: peaceful, easy, normal, hard
   #DEFAULT_PLAYER_PERMISSION_LEVEL: "member" # Options: visitor, member, operator
   #LEVEL_NAME: "my_minecraft_world"
   #LEVEL_SEED: "33480944"
-  #SERVER_NAME: "my_minecraft_server"
+  SERVER_NAME: "ILOVEGOLF"
   #SERVER_PORT: "19132"
   #LEVEL_TYPE: "DEFAULT" # Options: FLAT, LEGACY, DEFAULT
   #ALLOW_CHEATS: "false" # Options: true, false
@@ -37,11 +37,36 @@ apiVersion: v1
 metadata:
   name: bds
 spec:
+  storageClassName: local-storage
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 3Gi
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: bds-data
+spec:
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /mnt/local-volumes/minecraft
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - fcos-master
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -70,7 +95,7 @@ spec:
                 name: minecraft-bedrock
           volumeMounts:
             - mountPath: /data
-              name: data
+              name: bds-data
           ports:
             - containerPort: 19132
               protocol: UDP
