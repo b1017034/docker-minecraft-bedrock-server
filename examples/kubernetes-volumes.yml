@@ -18,7 +18,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
   local:
-    path: /mnt/local-volumes/minecraft/
+    path: /mnt/local-volumes/minecraft
   nodeAffinity:
     required:
       nodeSelectorTerms:
