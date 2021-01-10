@@ -44,7 +44,6 @@ spec:
     requests:
       storage: 3Gi
 ---
-
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -117,7 +116,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 1Gi
+            storage: 3Gi
 ---
 apiVersion: v1
 kind: Service
@@ -128,6 +127,7 @@ spec:
     app: bds
   ports:
     - port: 19132
+      nodePort: 30565
       protocol: UDP
   ipFamily: IPv4
   # Use LoadBalancer if running on a provider that supports that
