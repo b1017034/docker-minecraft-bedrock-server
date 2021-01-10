@@ -89,7 +89,7 @@ spec:
             - name: VERSION
               value: "1.16"
             - name: DEBUG
-              value: false
+              value: "true"
   volumeClaimTemplates:
     - metadata:
         name: data
