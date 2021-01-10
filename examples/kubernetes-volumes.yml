@@ -9,7 +9,7 @@ volumeBindingMode: WaitForFirstConsumer
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: local-pv
+  name: dbs-data-pv
 spec:
   capacity:
     storage: 1Gi
