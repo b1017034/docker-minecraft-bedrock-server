@@ -87,7 +87,9 @@ spec:
           livenessProbe: *probe
           env:
             - name: VERSION
-              value: 1.16
+              value: "1.16"
+            - name: DEBUG
+              value: false
   volumeClaimTemplates:
     - metadata:
         name: data
