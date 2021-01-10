@@ -85,6 +85,9 @@ spec:
                 - 127.0.0.1
             initialDelaySeconds: 30
           livenessProbe: *probe
+          env:
+            - name: VERSION
+              value: 1.16
   volumeClaimTemplates:
     - metadata:
         name: data
