@@ -75,7 +75,6 @@ spec:
           ports:
             - containerPort: 19132
               protocol: UDP
-            initialDelaySeconds: 30
           livenessProbe: *probe
   volumeClaimTemplates:
     - metadata:
