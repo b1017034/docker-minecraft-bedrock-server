@@ -85,11 +85,6 @@ spec:
                 - 127.0.0.1
             initialDelaySeconds: 30
           livenessProbe: *probe
-          env:
-            - name: VERSION
-              value: "1.16"
-            - name: DEBUG
-              value: "true"
   volumeClaimTemplates:
     - metadata:
         name: data
@@ -110,11 +105,12 @@ spec:
     app: bds
   ports:
     - port: 19132
-      nodePort: 30565
+      targetPort: 19132
+      # nodePort: 30565
       protocol: UDP
   ipFamily: IPv4
   # Use LoadBalancer if running on a provider that supports that
-#  type: LoadBalancer
+  type: LoadBalancer
   # or use NodePort on a non-managed system;
   # however, you'll need to lookup port assigned to the service
-  type: NodePort
+# type: NodePort
